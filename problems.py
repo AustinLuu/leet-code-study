@@ -128,3 +128,76 @@ class Solution:
             else:
                 left = pivot + 1
         return left
+#53. Maximum Subarray
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        # max_subarray = -math.inf
+        # for i in range(len(nums)):
+        #     current_sub = 0
+        #     for j in range(i, len(nums)):
+        #         current_sub += nums[j]
+        #         max_subarray = max(max_subarray,current_sub)
+        # return max_subarray
+        current_subarray = max_subarray = nums[0]
+        for num in nums[1:]:
+            current_subarray = max(num, current_subarray+num)
+            max_subarray = max(current_subarray, max_subarray)
+        return max_subarray
+
+#58. Length of Last Word
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        some_list = s.strip()
+        some_list = some_list.split(" ")
+        return len(some_list[-1])
+
+# 66. Plus One
+class Solution:
+    def plusOne(self, digits: List[int]) -> List[int]:
+        digits[len(digits)-1]+=1
+        for i in range(len(digits)-1,0,-1):
+            if digits[i] == 10:
+                digits[i] = 0
+                digits[i-1] += 1
+        if digits[0] == 10:
+            digits[0] = 0
+            digits.insert(0,1)
+        return digits
+#67. Add Binary
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        tot = 0
+        c = ""
+        for i in range(len(a)-1,-1,-1):
+            tot += int(a[i])*pow(2,len(a)-i-1)
+        for i in range(len(b)-1,-1,-1):
+            tot += int(b[i])*pow(2,len(b)-i-1)
+
+        if tot == 0:
+            return str(tot)
+        
+        if tot < pow(2,max(len(a),len(b))):
+            i = max(len(a),len(b))-1
+        else:
+            i = max(len(a),len(b))
+            
+        for j in range(i,-1,-1):
+            print(tot)
+            if pow(2,j)<=tot:
+                tot -= pow(2,j)
+                c+= "1"
+            elif pow(2,j) > tot or tot == 0:
+                c+= "0"
+
+        return c
+#69. Sqrt(x)
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        temp = 0
+        i = 0
+        while i!=-1:
+            if x >= i*i:
+                temp = i
+                i+=1
+            elif x < i*i and x >= (i-1)*(i-1):
+                return temp
