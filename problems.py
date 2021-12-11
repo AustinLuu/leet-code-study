@@ -201,3 +201,42 @@ class Solution:
                 i+=1
             elif x < i*i and x >= (i-1)*(i-1):
                 return temp
+#70. Climbing Stairs
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        if n <= 2:
+            return n
+        temp1 = 0
+        temp2 = 1
+        hold = 0
+        prev = 2
+        for i in range(3,n+1):
+            prev += temp1+temp2
+            hold = temp2
+            temp2 += temp1
+            temp1 = hold
+        return prev
+#83. Remove Duplicates from Sorted List
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        
+        if head == None:
+            return head
+        
+        current = head.next
+        prev = head
+        
+        while current is not None:
+            
+            if current.val == prev.val:
+                prev.next = current.next
+                current = current.next
+            else:
+                prev = prev.next
+                current = current.next
+        return head
