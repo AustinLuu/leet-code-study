@@ -294,3 +294,36 @@ class Solution:
                     df(node.right)
         df(root)
         return ans
+#100. Same Tree
+class Solution:
+    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+        """
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: bool
+        """  
+        # p and q are both None
+        if not p and not q:
+            return True
+        # one of p and q is None
+        if not q or not p:
+            return False
+        if p.val != q.val:
+            return False
+        return self.isSameTree(p.right,q.right) and \
+               self.isSameTree(p.left,q.left)
+
+class Solution:
+
+    def isSameTree(self, p, q):
+        stack = [(p, q)]
+        while stack:
+            (p, q) = stack.pop()
+            if p and q and p.val == q.val:
+                stack.extend([
+                    (p.left,  q.left),
+                    (p.right, q.right)
+                ])        
+            elif p or q:
+                return False
+        return True
